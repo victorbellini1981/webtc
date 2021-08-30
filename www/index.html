@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#2196f3">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>HEARTH'S HEALTH</title>
+    <link rel="icon" href="img/logo_cha.png">
+    <link rel="stylesheet" href="framework7/css/framework7.bundle.min.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/iziModal.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app" class="tabs">
+        <!---------------------------------------------------------------------------------------------------------------------------------->
+        <!--                                                    Login                                                                     -->
+        <!---------------------------------------------------------------------------------------------------------------------------------->
+        <div class="view view-login tab tab-active">
+            <div class="page stacked" data-name="login" id="login">
+                <div class="page-content">
+                    <div class="gif"><img src="img/coracao.gif"></div>
+                    <div class="block">
+                        <div class="titulo"><img src="img/eletrocardiograma.png"></div>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" name="usuario" placeholder="Usuário" required>
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" name="senha" placeholder="Senha" required>
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                </li>
+                                <li class="lembrar">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="lembrar">
+                                        <i class="icon-checkbox"></i>
+                                        <p style="padding-left: 5px; margin: 0px; color: black">Lembrar-me</p>
+                                    </label>
+                                </li>
+                                <li>
+                                    <div class="botaologin">
+                                        <button class="button button-fill "
+                                            onclick="entrar()">Login</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="textobaixo">
+                                        <p>2021 | TC João Victor Bellini</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---------------------------------------------------------------------------------------------------------------------------------->
+        <!--                                                   Principal                                                                  -->
+        <!---------------------------------------------------------------------------------------------------------------------------------->
+        <div class="view view-principal  fadeIn tab ">
+            <div class="navbar">
+                <div class="navbar-bg"></div>
+                <div class="navbar-inner sliding" style="background-color: #b22222;">
+                    <div class="right">
+                        <div class="tracinho">
+                            <!-- <div class="linha"></div> -->
+                        </div>
+                        <p></p>
+                        <a><img style="padding-top: 10px; height:3vh" src="img/sairtc.png"
+                                onclick="myApp.tab.show('.view-login');LoadPage('login');localStorage.setItem('dadosLembrarGerencial', JSON.stringify({}));"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu">
+                <!-- <div class="menu-inner">
+                    <a id="menuTed" href="#" onclick="LoadPage('menu'); trocaMenu(this)" class="menu-item">
+                        <div class="active-menu menu-item-content"><img src="img/usuariobranco.png"></div>
+                    </a>
+                </div> -->
+             
+                <div class="cabecalho">
+
+                </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------------>
+            <!--                                            Menu                                                                          -->
+            <!------------------------------------------------------------------------------------------------------------------------------>
+            <div class="page stacked" data-name="menu" id="menu">
+                <div class="page-content">
+
+                    <div class="quadro">
+
+                        <div class="direita">
+
+                            <div class="titulotela">
+                                <div class="row" id="rowP" style="display: flex;">
+                                    <h1>Digite o nome do paciente:</h1>
+                                    <!-- <img src="img/refresh.png" width="20px" onclick="Resgates.getResgates()"
+                                        class="naoSelecionavel"> -->
+                                        <input type="text" name="cod" id="codigo" style="border-style: solid; border-width: 1px; width: 300px; margin-top: 10px;">
+                                        <button class="button button-fill "
+                                            onclick="aumentaLetras()" style="width: 150px; margin-left: 15px; margin-top: 10px; font-size: small; background-color: #b22222;">Procurar</button>
+
+                                </div>
+                                <div class="dadosPaciente" id="dadosPaciente" style="display: none;">
+                                    <div class="row">
+                                        <h1 class="nomeCpf">
+                                            
+                                        </h1>
+                                    </div>
+                                </div>
+                                <div class="dadosPaciente2" id="dadosPaciente2" style="display: none;">
+                                    <div class="row">
+                                        <h1 class="altPesKg">
+                                            
+                                        </h1>
+                                    </div>
+                                </div>
+                                <!-- <div class="tracinho">
+                                    <div class="linha"></div>
+                                </div> -->
+                            </div>
+                            <div class="tabela elevation-1"
+                                style="margin-left: 100px;overflow-y: auto;overflow-x: hidden; display: block;">
+                                <div class="cabecalho">
+                                    <div class="row">
+                                        <div class="col-45">Data</div>
+                                        <div class="col-20">Atividade</div>
+                                        
+                                        
+                                        <div class="col-10"></div>
+                                    </div>
+                                </div>
+                                <div class="conteudoTabelaTed" id="conteudoTabelaTed">
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup popup-detalha-ted">
+                <div class="navbar">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner sliding" style="background-color: #b22222;">
+                        <div class="left">
+                            <img src="img/logotipo.png" class="naoSelecionavel">
+                        </div>
+                        <div class="right">
+
+                            <p></p>
+                            <a class="link  popup-close">
+                                <img src="img/sair2.png" alt="" class="naoSelecionavel">
+
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-content">
+
+
+                </div>
+                <div class="toolbar toolbar-bottom">
+                    <div class="toolbar-inner">
+
+
+
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="popover popoverObs">
+        <div class="popover-inner">
+            <ul>
+
+            </ul>
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Cordova -->
+    <!-- <script src="cordova.js"></script> -->
+    <script src="framework7/js/framework7.bundle.min.js"></script>
+    <script src="js/app/jquery.min.js"></script>
+    <script src="js/app/jquery.mask.min.js"></script>
+    <script src="js/app/md5.js"></script>
+    <script src="js/app/moment.min.js"></script>
+    <!-- Page -->
+    <script src="js/page/app.js"></script>
+    <script src="js/page/servidor.js"></script>
+    <script src="js/page/funcoes.js"></script>
+    <script src="js/page/telas.js"></script>
+</body>
+
+</html>
