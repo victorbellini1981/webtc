@@ -442,11 +442,13 @@ function listaSolicitacaoResgates(teds) {
             + '</div>');
     }
 }
-
+function semAtividade() {
+    Toast("Sem cadastro de atividade nesse horário!")
+}
 function listaAtividades(data) {
     var lista = $("#conteudoTabelaTed");
     lista.empty();
-    for (var i in data) {
+    for (var i = 0; i < data.length; i++) {
         if(i < 23) {
             dtinicial = data[i].data_atv;
             dtfinal = data[i+1].data_atv;
@@ -454,6 +456,7 @@ function listaAtividades(data) {
             dtinicial = data[i].data_atv;
             dtfinal = "sem data";   
         }
+        console.log(dtinicial + ", " + dtfinal);
         var dataI = data[i].data_atv.split(" ")[0];
         var hora = data[i].data_atv.split(" ")[1];
         var ano = dataI.split("-")[0]
@@ -463,10 +466,29 @@ function listaAtividades(data) {
         
         lista.append('<div class="row ' + (i % 2 == 0 ? '' : 'branco') + '">'
             + '    <div class="col-40">' + (datahj + " às " + hora + "hs") + '</div>'
-            + '    <div class="col-15">' + data[i].atividade + '</div>'
-            + '    <div class="col-10" onclick=""><i class="material-icons">search</i></div>'
-            + '</div>');    
+            + '    <div class="col-15">' + data[i].atividade + '</div>' +
+            (
+                data[i].atividade != "escolha a atividade"
+                ? '    <div class="col-10" onclick="Resgates.getBatimentos('+Util.normaliza(dtinicial)+', '+Util.normaliza(dtfinal)+')"><i class="material-icons">search</i></div>'
+                : '    <div class="col-10" onclick="semAtividade()"><i class="material-icons">search</i></div>'
+            ) 
+            + '</div>');   
     }
+}
+
+function listaBatimentos(data) {
+    /* $('.popup-detalha-ted .page-content #rowNome').empty();
+    $('.popup-detalha-ted .page-content #rowNome').html("<b>Nome: </b>"+nomeP); */
+    var listaBat = $('.popup-detalha-ted .page-content #rowBat').empty()
+    for (var i in data) {
+        listaBat.append('<div class="row">' +
+        '     <div class="col coluna"><b>Data: </b>'+data[i].data_bat+' hs'+'<div style="width: 10px;"></div>'+'<b> Batimentos: </b>'+data[i].batimento+' bpm'+'</div> ' +
+        '  </div>'
+
+        );
+    }
+            
+    myApp.popup.open('.popup-detalha-ted');    
 }
 
 function tedOuCupom(data) {
@@ -556,132 +578,3 @@ function detalhaTed(data) {
     myApp.popup.open('.popup-detalha-ted');
 }
 
-/* function detalhaTed(ted = {}) {
-    $('.popup-detalha-ted .page-content').empty();
-    $('.popup-detalha-ted .page-content').append('<div class="conteudo">' +
-        '            <div class="row titulo">' +
-        '                <div class="col coluna">Dados Pessoais</div>' +
-        '             </div>' +
-        '             <div class="tracinho">' +
-        '                 <div class="linha"></div>' +
-        '            </div>' +
-        '            <div class="row"><b>Apelido/Nome Fantasia:</b> ' + (ted.pessoa.apelido_nomefantasia == undefined ? "-" : ted.pessoa.apelido_nomefantasia) + '</div> ' +
-        '            <div class="row"><b>Nome/RazãoSocial:</b> ' + (ted.pessoa.nome_razaosocial == undefined ? "-" : ted.pessoa.nome_razaosocial) + '</div> ' +
-        (ted.pessoa.tipo == 'PJ' ? '' : '<div class="row"><b>CPF:</b> ' + ted.pessoa.cpf + '</div>') +
-        (ted.pessoa.tipo == 'PF' ? '' : '<div class="row"><b>CNPJ:</b> ' + ted.pessoa.cnpj + '</div>') +
-        (ted.pessoa.tipo == 'PF' ? '' : '<div class="row"><b>Inscrição Estadual:</b> ' + (ted.pessoa.inscestadual == undefined ? "-" : ted.pessoa.inscestadual) + '</div>') +
-        (ted.pessoa.tipo == 'PF' ? '' : '<div class="row"><b>Inscrição Municipal:</b> ' + (ted.pessoa.inscmunicipal == undefined ? "-" : ted.pessoa.inscmunicipal) + '</div>') +
-        '            <div class="row"><b>Telefone (fixo):</b> ' + '(' + (ted.pessoa.ddd_fixo == undefined ? " " : ted.pessoa.ddd_fixo) + ') ' + (ted.pessoa.tel_fixo == undefined ? "-" : ted.pessoa.tel_fixo) + '</div>' +
-        '            <div class="row"><b>Telefone (móvel):</b> ' + '(' + (ted.pessoa.ddd_movel == undefined ? " " : ted.pessoa.ddd_movel) + ') ' + (ted.pessoa.tel_movel == undefined ? "-" : ted.pessoa.tel_movel) + '</div>' +
-        '            <div class="row"><b>Email:</b> ' + (ted.pessoa.email == undefined ? "-" : ted.pessoa.email) + '</div>' +
-        '            <div class="row"><b>Data de Cadastro:</b> ' + moment(ted.pessoa.datacadastro == undefined ? "-" : ted.pessoa.datacadastro).format("DD/MM/YYYY") + '</div>' +
-        (ted.pagarnivel == false ? 
-        '             <div class="col coluna">Dados Bancários</div>' +
-        '             </div>' +
-        '             <div class="tracinho">' +
-        '                 <div class="linha"></div>' +
-        '            </div>' +
-        (ted.idtransferencias_tipo == 1 ?
-        '            <div class="row"><b>Nome Correntista:</b> ' + (ted.pessoa.cb_nome == undefined ? "-" : ted.pessoa.cb_nome) + '</div>' +
-        '            <div class="row"><b>Tipo de Conta:</b> ' + (ted.pessoa.cb_tipoconta == undefined ? "-" : ted.pessoa.cb_tipoconta) + '</div>' +
-        '            <div class="row"><b>Código do Banco:</b> ' + (ted.pessoa.cb_codigobanco == undefined ? "-" : ted.pessoa.cb_codigobanco) + '</div>' +
-        '            <div class="row"><b>Agência:</b> ' + (ted.pessoa.cb_agencia == undefined ? "-" : ted.pessoa.cb_agencia) + '-' + (ted.pessoa.cb_agenciadv == undefined ? "-" : ted.pessoa.cb_agenciadv) + '</div>' +
-        '            <div class="row"><b>Número da Conta:</b> ' + (ted.pessoa.cb_numeroconta == undefined ? "-" : ted.pessoa.cb_numeroconta) + '-' + (ted.pessoa.cb_numerocontadv == undefined ? "-" : ted.pessoa.cb_numerocontadv) + '</div>' 
-
-        :   '    <div class="row"><b>Tipo chave: </b> ' + (ted.tipo_chavepix == undefined ? "-" : ted.tipo_chavepix) + '</div>' +
-            '    <div class="row"><b>Chave: </b> ' + (ted.pessoa.chave_pix == undefined ? "-" : ted.pessoa.chave_pix) + '</div>' ) +
-           '            <div class="row"><b>Valor da transferência:</b> R$ ' + Util.formataDuasCasas(ted.valorfinal) + '</div>' 
-
-
-      : 
-        '       <div class="col coluna">Dados Bancários Parceiro</div>' +
-        '             </div>' +
-        '             <div class="tracinho">' +
-        '                 <div class="linha"></div>' +
-        '            </div>' +
-        '       <div class="row"><b>Nome Correntista:</b> ' + (ted.nome == undefined ? "-" : ted.nome) + '</div>' +
-        '            <div class="row"><b>Tipo de Conta:</b> ' + (ted.cb_tipoconta == undefined ? "-" : ted.cb_tipoconta) + '</div>' +
-        '            <div class="row"><b>Código do Banco:</b> ' + (ted.cb_codigobanco == undefined ? "-" : ted.cb_codigobanco) + '</div>' +
-        '            <div class="row"><b>Agência:</b> ' + (ted.cb_agencia == undefined ? "-" : ted.cb_agencia) + '-' + (ted.cb_agenciadv == undefined ? "-" : ted.cb_agenciadv) + '</div>' +
-        '            <div class="row"><b>Número da Conta:</b> ' + (ted.cb_numeroconta == undefined ? "-" : ted.cb_numeroconta) + '-' + (ted.cb_numerocontadv == undefined ? "-" : ted.pessoa.cb_numerocontadv) + '</div>' +
-        '            <div class="row"><b>Valor da transferência:</b> R$ ' + Util.formataDuasCasas(ted.valorfinal)) + '</div>' +
-        '   </div>' +
-        '  </div>');
-        ted.valor_formatado =  Util.formataDuasCasas(ted.valorfinal);
-    if (ted.status.idtranferenciastatus == 1) {
-        $(".popup.popup-detalha-ted .toolbar-bottom  .toolbar-inner").html('<button class="col button button-fill button-round" onclick="Teds.setAprovaSolicitacaoTED(' + Util.normaliza(ted) + ')">Aprovar</button>' +
-            ' <button class="col button button-fill button-round rejeitar" onclick="Teds.setRejeitaSolicitacaoTED(' + Util.normaliza(ted) + ')">Rejeitar</button>');
-    } else if (ted.status.idtranferenciastatus == 4) {
-        $(".popup.popup-detalha-ted .toolbar-bottom  .toolbar-inner").html('  <button class="col button button-fill button-round" onclick="concluirTransferencia(' + Util.normaliza(ted) + ')" >Concluir</button>' +
-            ' <button class="col button button-fill button-round rejeitar" onclick="Teds.setRejeitaSolicitacaoTED(' + Util.normaliza(ted) + ')">Rejeitar</button>');
-    } else if (ted.status.idtranferenciastatus == 2 || ted.status.idtranferenciastatus == 3) {
-        $(".popup.popup-detalha-ted .toolbar-bottom  .toolbar-inner").html('');
-    }
-    myApp.popup.open('.popup-detalha-ted');
-}
-
-function concluirTransferencia(obj) {
-    myApp.dialog.create({
-
-        closeByBackdropClick: false,
-        animate: true,
-        cssClass: 'dialog-transferencia',
-        title: "",
-        content: "<form class='list no-hairlines-md'>"
-            + "<ul>"
-            + '<li class="item-content item-input item-input-outline img">'
-            + '<div class="img-foto">'
-            + '<div class="circulo" id="foto-icon" >'
-            + '<label class="botao" for="imagemTransferencia">'
-            + '</label>'
-
-            + '</div>'
-            + '<input id="imagemTransferencia" onchange="uploadImgTransferencia(' + Util.normaliza(obj) + ')" type="file">'
-            + '<input name="imagemTransferenciaBaixada" id="imagemTransferenciaBaixada" type="hidden">'
-            + '</div>'
-            + '</li>'
-            + "</ul>"
-            + "</form>",
-        buttons: [
-            {
-                text: 'Cancelar',
-            },
-            {
-                text: 'Concluir',
-                cssClass: 'disabled',
-                onClick: function () {
-
-                    obj.url_comprovante = $("#imagemTransferenciaBaixada").val()
-                    Teds.setConcluiSolicitacaoTED(obj);
-
-                },
-            },
-        ],
-
-    }).open();
-}
-
-function uploadImgTransferencia(obj = {}) {
-
-    var nomeFoto = "transferencia_" + obj.idtransferencia + "_" + obj.documento;
-    var form_data = new FormData();
-    var file_data = $("#imagemTransferencia")[0].files[0]
-    form_data.append("file_name", file_data);
-    $.ajax({
-
-        url: "https://sistemaagely.com.br:8345/upvendas30112020/atelieServer?tela=Upload&nomeArquivo=" + nomeFoto + "&caminho=&tipo=getImagem",
-        cache: false,
-        contentType: false,
-        processData: false,
-        async: false,
-        data: form_data,
-        type: 'post',
-        success: function (data) {
-            // display image
-            $("#imagemTransferenciaBaixada").val(data)
-            $("#foto-icon").css('background-image', 'url("img/check.png")')
-            $("#app > div.dialog.dialog-buttons-2.dialog-transferencia.modal-in > div.dialog-buttons > span.dialog-button.disabled").removeClass("disabled");
-        }
-    });
-}
- */

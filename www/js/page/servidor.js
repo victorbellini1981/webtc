@@ -36,7 +36,11 @@ function Resgates() {
         }, function(e) { console.log(e); });
     }
     this.getBatimentos = function(datainicial, datafinal) {
-        var GetBatimentos = new Promessa("GetBatimentos", {dtinicial : datainicial, dtfinal: datafinal});
+        var obj = {
+            dtinicial: datainicial,
+            dtfinal : datafinal
+        }
+        var GetBatimentos = new Promessa("GetBatimentos", {obj : JSON.stringify(obj)});
         GetBatimentos.then(function(dados) {
             if(dados.situacao == "sucesso"){
                 /* if(data != undefined){

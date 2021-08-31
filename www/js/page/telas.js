@@ -15,7 +15,7 @@ var nomeP = "";
 var idP = 0;
 var dtinicial = "";
 var dtfinal = "";
-
+var atividade = "";
 
 window.onload = function () {
 
@@ -25,8 +25,8 @@ window.onload = function () {
             /* Pega Versão */
             if (myApp["data"]["teste"]) {
                 myApp["data"]["versao"] = "data";
-                //myApp["data"]["banco"] = "http://127.0.0.1:8080/AtelieServer/"
-                myApp["data"]["banco"] = "http://192.168.106.125:8080/Projetotc/"
+                myApp["data"]["banco"] = "http://10.0.0.233:8080/Projetotc/"
+                //myApp["data"]["banco"] = "http://192.168.106.125:8080/Projetotc/"
                 //myApp["data"]["banco"] = "http://192.168.0.104:8080/Projetotc/";
                 // myApp["data"]["banco"] = "https://sistemaagely.com.br:8245/upvendas140121c/"
                 //myApp["data"]["banco"] = "http://10.0.0.3:8080/ChaDeLingerie/";

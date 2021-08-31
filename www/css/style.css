@@ -341,7 +341,7 @@
           border-radius: 5px;
           border-color: white; }
   [data-name="menu"] .tabela #conteudoTabelaTed {
-    height: 70vh;
+    height: 60vh;
     overflow: auto; }
     [data-name="menu"] .tabela #conteudoTabelaTed .row {
       padding: 5px;
