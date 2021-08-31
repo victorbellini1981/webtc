@@ -35,6 +35,26 @@ function Resgates() {
             }
         }, function(e) { console.log(e); });
     }
+    this.getBatimentos = function(datainicial, datafinal) {
+        var GetBatimentos = new Promessa("GetBatimentos", {dtinicial : datainicial, dtfinal: datafinal});
+        GetBatimentos.then(function(dados) {
+            if(dados.situacao == "sucesso"){
+                /* if(data != undefined){
+                    for(var i in dados.transferencias){
+                        if(dados.transferencias[i ].idtransferencia == data.idtransferencia){
+                            detalhaTed(dados.transferencias[i]);
+                            
+                        }
+                    }
+                } */
+                $(".menu .menu-inner .menu-item .menu-item-content").removeClass('active-menu');
+                $('#menuTed').find(".menu-item-content").addClass('active-menu');
+                listaBatimentos(dados.obj);
+            }else{
+                Toast(dados.msg)
+            }
+        }, function(e) { console.log(e); });
+    }
     this.getResgates = function() {
         var GetSolicitacaoResgates = new Promessa("GetResgatesTotal");
         GetSolicitacaoResgates.then(function(dados) {

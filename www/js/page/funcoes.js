@@ -447,6 +447,13 @@ function listaAtividades(data) {
     var lista = $("#conteudoTabelaTed");
     lista.empty();
     for (var i in data) {
+        if(i < 23) {
+            dtinicial = data[i].data_atv;
+            dtfinal = data[i+1].data_atv;
+        } else {
+            dtinicial = data[i].data_atv;
+            dtfinal = "sem data";   
+        }
         var dataI = data[i].data_atv.split(" ")[0];
         var hora = data[i].data_atv.split(" ")[1];
         var ano = dataI.split("-")[0]

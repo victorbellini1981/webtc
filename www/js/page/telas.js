@@ -13,7 +13,8 @@ var index = 0;
 var dtfinalizacao = "";
 var nomeP = "";
 var idP = 0;
-
+var dtinicial = "";
+var dtfinal = "";
 
 
 window.onload = function () {
@@ -25,8 +26,8 @@ window.onload = function () {
             if (myApp["data"]["teste"]) {
                 myApp["data"]["versao"] = "data";
                 //myApp["data"]["banco"] = "http://127.0.0.1:8080/AtelieServer/"
-                myApp["data"]["banco"] = "http://192.168.56.1:8080/Projetotc/"
-                //myApp["data"]["banco"] = "http://127.0.0.1:8080/ChaDeLingerie/";
+                myApp["data"]["banco"] = "http://192.168.106.125:8080/Projetotc/"
+                //myApp["data"]["banco"] = "http://192.168.0.104:8080/Projetotc/";
                 // myApp["data"]["banco"] = "https://sistemaagely.com.br:8245/upvendas140121c/"
                 //myApp["data"]["banco"] = "http://10.0.0.3:8080/ChaDeLingerie/";
                 typeof cordova !== "undefined" ? init.app() : init.web();
