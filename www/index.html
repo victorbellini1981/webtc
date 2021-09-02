@@ -88,7 +88,7 @@
                         </div>
                         <p></p>
                         <a><img style="padding-top: 10px; height:3vh" src="img/sairtc.png"
-                                onclick="myApp.tab.show('.view-login');LoadPage('login');localStorage.setItem('dadosLembrarGerencial', JSON.stringify({}));"></a>
+                                onclick="myApp.tab.show('.view-login');displaydisblock();localStorage.setItem('dadosLembrarGerencial', JSON.stringify({}));"></a>
                     </div>
                 </div>
             </div>
@@ -123,23 +123,43 @@
                                             onclick="aumentaLetras()" style="width: 150px; margin-left: 15px; margin-top: 10px; font-size: small; background-color: #b22222;">Procurar</button>
 
                                 </div>
-                                <div class="dadosPaciente" id="dadosPaciente" style="display: none;">
-                                    <div class="row">
-                                        <h1 class="nomeCpf">
-                                            
-                                        </h1>
-                                    </div>
-                                </div>
-                                <div class="dadosPaciente2" id="dadosPaciente2" style="display: none;">
-                                    <div class="row">
-                                        <h1 class="altPesKg">
-                                            
-                                        </h1>
-                                    </div>
-                                </div>
+                                
                                 <!-- <div class="tracinho">
                                     <div class="linha"></div>
                                 </div> -->
+                            </div>
+                            <div class="dadosPaciente" id="dadosPaciente" style="display: none;">
+                                <div class="row">
+                                    <div class="col-50" style="text-align: right;">
+                                        <h1 class="nome">
+                                        
+                                        </h1> 
+                                    </div>
+                                    <div class="col-50" style="text-align: left;">
+                                        <h1 class="cpf">
+                                        
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dadosPaciente2" id="dadosPaciente2" style="display: none;">
+                                <div class="row">
+                                    <div class="col-33" style="text-align: right;">
+                                        <h1 class="idade" >
+                                        
+                                        </h1> 
+                                    </div>
+                                    <div class="col-33" style="text-align: center;">
+                                        <h1 class="altura" >
+                                        
+                                        </h1>
+                                    </div>
+                                    <div class="col-33" style="text-align: left;">
+                                        <h1 class="peso">
+                                        
+                                        </h1>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tabela elevation-1"
                                 style="margin-left: 100px;overflow-y: auto;overflow-x: hidden; display: block;">

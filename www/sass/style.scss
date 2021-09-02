@@ -361,9 +361,10 @@ $s-device: 378px;
         .direita {
             margin-left: 15px;
             .dadosPaciente2 {
-                width: 60vw !important; 
-                margin-left: 12vw;
+                width: 100vw !important; 
+                
                 .row{
+                    width: 100%;
                     align-items: center;
                         h1 {
                             font-size: medium;
@@ -377,9 +378,9 @@ $s-device: 378px;
             }
             .dadosPaciente {
                 margin-top: 40px;
-                width: 60vw !important; 
-                margin-left: 10vw;
+                width: 100vw !important; 
                 .row{
+                    width: 100%;
                     align-items: center;
                         h1 {
                             font-size: medium;

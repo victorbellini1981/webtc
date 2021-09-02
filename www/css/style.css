@@ -271,9 +271,9 @@
   [data-name="menu"] .quadro .direita {
     margin-left: 15px; }
     [data-name="menu"] .quadro .direita .dadosPaciente2 {
-      width: 60vw !important;
-      margin-left: 12vw; }
+      width: 100vw !important; }
       [data-name="menu"] .quadro .direita .dadosPaciente2 .row {
+        width: 100%;
         align-items: center; }
         [data-name="menu"] .quadro .direita .dadosPaciente2 .row h1 {
           font-size: medium;
@@ -283,9 +283,9 @@
           margin-top: 15px; }
     [data-name="menu"] .quadro .direita .dadosPaciente {
       margin-top: 40px;
-      width: 60vw !important;
-      margin-left: 10vw; }
+      width: 100vw !important; }
       [data-name="menu"] .quadro .direita .dadosPaciente .row {
+        width: 100%;
         align-items: center; }
         [data-name="menu"] .quadro .direita .dadosPaciente .row h1 {
           font-size: medium;

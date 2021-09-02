@@ -391,17 +391,28 @@ function aumentaLetras() {
     nomeP = $('#codigo').val().toUpperCase();
     Resgates.dadosPaciente(nomeP);
 }
-
+function displaydisblock() {
+    $('#codigo').val("");
+    document.getElementById("dadosPaciente").style.display = 'none';
+    document.getElementById("dadosPaciente2").style.display = 'none';
+    document.getElementById("rowP").style.display = 'flex'; 
+    var lista = $("#conteudoTabelaTed");
+    lista.empty();
+    LoadPage('Login');
+}
 function listaPaciente(data) {
     idP = data.idusuario;    
     if (idP != 0) {
         
-        document.getElementById("dadosPaciente").style.display = 'block';
-        document.getElementById("dadosPaciente2").style.display = 'block';
+        document.getElementById("dadosPaciente").style.display = 'flex';
+        document.getElementById("dadosPaciente2").style.display = 'flex';
         document.getElementById("rowP").style.display = 'none';
         
-        $("#menu .nomeCpf").html("<b>Paciente: </b>" +data.nome+ "  " + "  <b>Cpf: </b>" +data.cpf);
-        $("#menu .altPesKg").html("<b>Idade: </b>" + data.idade+ " anos" + "  " +  "<b>Altura: </b>" +data.altura+" m" + "  " + "<b>Peso: </b>" +data.peso+ " kg");
+        $("#menu .nome").html("<b>Paciente: </b>" +data.nome);
+        $("#menu .cpf").html("<b>Cpf: </b>" +data.cpf);
+        $("#menu .idade").html("<b>Idade: </b>" + data.idade+ " anos");
+        $("#menu .altura").html("<b>Altura: </b>" +data.altura+" m");
+        $("#menu .peso").html("<b>Peso: </b>" +data.peso+ " kg");
 
         Resgates.getAtividades(idP)
     } else {
@@ -448,7 +459,7 @@ function semAtividade() {
 function listaAtividades(data) {
     var lista = $("#conteudoTabelaTed");
     lista.empty();
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < (data.length - 1); i++) {
         if(i < 23) {
             dtinicial = data[i].data_atv;
             dtfinal = data[i+1].data_atv;
